@@ -1,0 +1,11 @@
+Django==4.2.3
+django-elasticsearch-dsl==7.3
+docker==6.1.1
+elastic-transport==8.4.0
+elasticsearch==7.17.9
+elasticsearch-dsl==7.4.1
+python-dotenv==1.0.0
+SQLAlchemy==2.0.13
+sqlparse==0.4.4
+transformers==4.30.2
+psycopg2==2.9.6
