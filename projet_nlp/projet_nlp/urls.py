@@ -16,7 +16,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from nlp_app import views
+from django.contrib.auth.views import LoginView, LogoutView
+from django.views.generic import TemplateView
+
+app_name = "nlp_app"
+
 
 urlpatterns = [
+    path('', views.home, name='home'),
     path('admin/', admin.site.urls),
+    path('login/', LoginView.as_view(), name='login'),
+    path('logout/', LogoutView.as_view(next_page='home'), name='logout'),
+    path('signup/', views.signup, name='signup'),
+    path('psy/', TemplateView.as_view(template_name='psy.html'), name='psy'),
+    path('patient/', TemplateView.as_view(template_name='patient.html'), name='patient'),
 ]

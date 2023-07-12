@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Votre Projet</title>
+</head>
+<body>
+    <nav>
+        {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}">Se déconnecter</a>
+            {% if user.is_patient %}
+                <a href="{% url 'patient' %}">Espace Patient</a>
+            {% else %}
+                <a href="{% url 'psy' %}">Espace Psychologue</a>
+            {% endif %}
+        {% else %}
+            <a href="{% url 'login' %}">Se connecter</a>
+            <a href="{% url 'signup' %}">S'inscrire</a>
+        {% endif %}
+    </nav>
+    {% block content %}
+    {% endblock %}
+    {% block signup %}
+    {% endblock %}
+    {% block login %}
+    {% endblock %}
+    {% block patient %}
+    {% endblock %}
+
+</body>
+</html>
