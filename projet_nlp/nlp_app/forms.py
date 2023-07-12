@@ -1,13 +1,12 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
-from .models import Psychologue, Patient, Texte
+from .models import Psychologue, Patient, Texte, User  
 
 class SignUpForm(UserCreationForm):
     is_psychologue = forms.BooleanField(required=False)
 
     class Meta:
-        model = User
+        model = User  
         fields = ('first_name', 'last_name', 'username', 'password1', 'password2', 'is_psychologue', )
 
     def save(self, commit=True):
@@ -26,4 +25,3 @@ class TexteForm(forms.ModelForm):
     class Meta:
         model = Texte
         fields = ['content']
-

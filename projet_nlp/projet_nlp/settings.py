@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'nlp_app',
+    'django_elasticsearch_dsl',
 ]
 
 MIDDLEWARE = [
@@ -70,6 +71,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'projet_nlp.wsgi.application'
+AUTH_USER_MODEL = 'nlp_app.User'
 
 
 # Database
@@ -90,6 +92,7 @@ ELASTICSEARCH_DSL = {
         'hosts': 'elasticsearch:9200' 
     },
 }
+
 
 
 # Password validation

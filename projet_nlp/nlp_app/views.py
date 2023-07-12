@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from .forms import SignUpForm, TexteForm
 from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth import update_session_auth_hash
+from django.views.decorators.http import require_POST
 
 def home(request):
     return render(request, 'home.html')
@@ -15,20 +17,21 @@ def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
-            user = form.save(commit=False)  # Obtenir l'instance du modèle sans l'enregistrer en base de données
-
-            if form.cleaned_data['is_psychologue']:
-                user.is_psychologue = True
-                user.is_patient = False
-            else:
-                user.is_psychologue = False
-                user.is_patient = True
-
-            user.save()  # Enregistrer l'utilisateur en base de données
-
+            user = form.save()
+            update_session_auth_hash(request, user)  
             return redirect('home')
     else:
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
 
-    
+def patient_view(request):
+    if request.method == 'POST':
+        form = TexteForm(request.POST)
+        if form.is_valid():
+            texte = form.save(commit=False)
+            texte.patient = request.user.patient
+            texte.save()
+            return redirect('home')
+    else:
+        form = TexteForm()
+    return render(request, 'patient.html', {'form': form})

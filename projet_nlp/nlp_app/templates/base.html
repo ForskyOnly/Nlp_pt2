@@ -9,7 +9,7 @@
             <a href="{% url 'logout' %}">Se déconnecter</a>
             {% if user.is_patient %}
                 <a href="{% url 'patient' %}">Espace Patient</a>
-            {% else %}
+            {% elif user.is_psychologue %}
                 <a href="{% url 'psy' %}">Espace Psychologue</a>
             {% endif %}
         {% else %}
@@ -17,6 +17,7 @@
             <a href="{% url 'signup' %}">S'inscrire</a>
         {% endif %}
     </nav>
+
     {% block content %}
     {% endblock %}
     {% block signup %}
