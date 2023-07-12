@@ -21,6 +21,9 @@ services:
       - POSTGRES_DB=django
     volumes:
       - postgres_data:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"
+
 
 
   elasticsearch:
