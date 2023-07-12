@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+
+{% block mes_patient %}
+{% for patient in patients %}
+    <h2>{{ patient.first_name }} {{ patient.last_name }}</h2>
+{% endfor %}
+{% endblock %}

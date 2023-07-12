@@ -29,6 +29,8 @@ urlpatterns = [
     path('login/', LoginView.as_view(next_page='home'), name='login'),
     path('logout/', LogoutView.as_view(next_page='home'), name='logout'),
     path('signup/', views.signup, name='signup'),
-    path('psy/', TemplateView.as_view(template_name='psy.html'), name='psy'),
+    path('psy/', views.cree_patient, name='psy'),
     path('patient/', views.patient_view, name='patient'),
+    path('mes-patient/', views.mes_patient, name='mes_patient'),
+    path('cree-patient/', views.cree_patient, name='cree_patient'),
 ]

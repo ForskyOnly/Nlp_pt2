@@ -6,17 +6,21 @@
 <body>
     <nav>
         {% if user.is_authenticated %}
+            <a href="{% url 'home' %}">Accueil</a> 
             <a href="{% url 'logout' %}">Se déconnecter</a>
             {% if user.is_patient %}
                 <a href="{% url 'patient' %}">Espace Patient</a>
             {% elif user.is_psychologue %}
                 <a href="{% url 'psy' %}">Espace Psychologue</a>
+                <a href="{% url 'mes_patient' %}">Mes Patients</a>
             {% endif %}
         {% else %}
             <a href="{% url 'login' %}">Se connecter</a>
             <a href="{% url 'signup' %}">S'inscrire</a>
         {% endif %}
     </nav>
+    
+    
 
     {% block content %}
     {% endblock %}
@@ -26,6 +30,13 @@
     {% endblock %}
     {% block patient %}
     {% endblock %}
+    {% block psy %}
+    {% endblock %}
+    {% block mes_patient %}
+    {% endblock %}
+
+
+
 
 </body>
 </html>
