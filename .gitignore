@@ -5,6 +5,7 @@ __pycache__/
 
 # C extensions
 *.so
+projet_nlp/data/db/
 
 # Distribution / packaging
 .Python
