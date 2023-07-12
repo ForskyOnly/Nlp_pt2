@@ -4,6 +4,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth import update_session_auth_hash
 from django.views.decorators.http import require_POST, require_http_methods
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 def home(request):
     return render(request, 'home.html')
@@ -54,11 +55,21 @@ def cree_patient(request):
 
 @login_required
 def mes_patient(request):
+    query = request.GET.get('q', '')  # Récupérer la valeur de la requête de recherche
+    
     psychologue = request.user.psychologue
-    patients = Patient.objects.filter(psychologue=psychologue)
-
+    
+    if query:
+        patients = Patient.objects.filter(
+            Q(first_name__icontains=query) | Q(last_name__icontains=query), psychologue=psychologue  # Recherche par nom ou prénom
+        )
+    else:
+        patients = Patient.objects.filter(psychologue=psychologue)
+    
     context = {
-        'patients': patients
+        'patients': patients,
+        'query': query  # Passer la valeur de la requête de recherche au contexte
     }
-
+    
     return render(request, 'mes_patient.html', context)
+
