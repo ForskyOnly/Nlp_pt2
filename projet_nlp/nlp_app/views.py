@@ -61,14 +61,14 @@ def mes_patient(request):
     
     if query:
         patients = Patient.objects.filter(
-            Q(first_name__icontains=query) | Q(last_name__icontains=query), psychologue=psychologue  # Recherche par nom ou prénom
-        )
+            Q(first_name__icontains=query) | Q(last_name__icontains=query), psychologue=psychologue  
+        ).prefetch_related('texte_set')
     else:
-        patients = Patient.objects.filter(psychologue=psychologue)
+        patients = Patient.objects.filter(psychologue=psychologue).prefetch_related('texte_set')
     
     context = {
         'patients': patients,
-        'query': query  # Passer la valeur de la requête de recherche au contexte
+        'query': query  
     }
     
     return render(request, 'mes_patient.html', context)

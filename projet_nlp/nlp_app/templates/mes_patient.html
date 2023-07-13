@@ -53,6 +53,14 @@
 <div class="container">
     {% for patient in patients %}
         <h2>{{ patient.first_name }} {{ patient.last_name }}</h2>
+        
+        <!-- Afficher les textes de chaque patient -->
+        {% for texte in patient.texte_set.all %}
+            <p>{{ texte.content }}</p>
+        {% empty %}
+            <p>Aucun texte trouvé pour ce patient.</p>
+        {% endfor %}
+
     {% endfor %}
 
     <form method="GET" action="{% url 'mes_patient' %}">
