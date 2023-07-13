@@ -9,14 +9,13 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         fake = Faker()
 
-        for _ in range(5):
-            user = User.objects.create_user(username=fake.user_name(), password=fake.password(), is_psychologue=True)
-            Psychologue.objects.create(user=user, first_name=fake.first_name(), last_name=fake.last_name())
+        # Create one psychologist
+        user = User.objects.create_user(username="Le_Psy", password="Lepsy@59800", is_psychologue=True)
+        psychologue = Psychologue.objects.create(user=user, first_name=fake.first_name(), last_name=fake.last_name())
 
-        all_psychologists = Psychologue.objects.all()
-
-        for i in range(50):
+        # Create 10 patients and assign them to the created psychologist
+        for _ in range(10):
             user = User.objects.create_user(username=fake.user_name(), password="Azerty@123", is_patient=True)
             patient = Patient.objects.create(user=user, first_name=fake.first_name(), last_name=fake.last_name())
-            patient.psychologue = all_psychologists[i % 5]  
+            patient.psychologue = psychologue
             patient.save()
