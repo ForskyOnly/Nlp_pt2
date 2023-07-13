@@ -40,6 +40,7 @@ class Patient(models.Model):
 
 class Texte(models.Model):
     content = models.TextField()
-    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name='textes')
     emotion = models.CharField(max_length=200, blank=True, null=True) 
     date = models.DateTimeField(auto_now_add=True)
+

@@ -55,21 +55,27 @@ def cree_patient(request):
 
 @login_required
 def mes_patient(request):
-    query = request.GET.get('q', '')  # Récupérer la valeur de la requête de recherche
+    query = request.GET.get('q', '')  
     
     psychologue = request.user.psychologue
     
     if query:
         patients = Patient.objects.filter(
-            Q(first_name__icontains=query) | Q(last_name__icontains=query), psychologue=psychologue  
-        ).prefetch_related('texte_set')
+            Q(first_name__icontains=query) |
+            Q(last_name__icontains=query) |
+            Q(textes__content__icontains=query)
+        ).prefetch_related('textes').distinct()
     else:
-        patients = Patient.objects.filter(psychologue=psychologue).prefetch_related('texte_set')
-    
+        patients = Patient.objects.filter(
+            textes__content__icontains=query
+        ).prefetch_related('textes').distinct()
+
     context = {
         'patients': patients,
         'query': query  
     }
     
     return render(request, 'mes_patient.html', context)
+
+
 
