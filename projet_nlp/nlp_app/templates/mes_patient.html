@@ -1,14 +1,65 @@
 {% extends 'base.html' %}
 
 {% block mes_patient %}
-{% for patient in patients %}
-    <h2>{{ patient.first_name }} {{ patient.last_name }}</h2>
-{% endfor %}
+<style>
+    .container {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
 
-<form method="GET" action="{% url 'mes_patient' %}">
+    h2 {
+        margin-bottom: 20px;
+    }
+
+    form {
+        margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+        width: 300px;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+
+    button[type="submit"] {
+        padding: 10px 20px;
+        background-color: #337ab7;
+        color: #fff;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #286090;
+    }
+
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+    }
+
+    li {
+        margin-bottom: 10px;
+    }
+</style>
+
+<div class="container">
+    {% for patient in patients %}
+        <h2>{{ patient.first_name }} {{ patient.last_name }}</h2>
+    {% endfor %}
+
+    <form method="GET" action="{% url 'mes_patient' %}">
         <input type="text" name="q" placeholder="Rechercher un patient...">
         <button type="submit">Rechercher</button>
     </form>
+
     {% if patients and query %}
         <h2>Résultats de la recherche pour "{{ query }}" :</h2>
         <ul>
@@ -18,14 +69,6 @@
                 <li>Aucun résultat trouvé.</li>
             {% endfor %}
         </ul>
-    {% elif patients %}
-        <h2>Tous les patients :</h2>
-        <ul>
-            {% for patient in patients %}
-                <li>{{ patient.first_name }} {{ patient.last_name }}</li>
-            {% empty %}
-                <li>Aucun patient trouvé.</li>
-            {% endfor %}
-        </ul>
     {% endif %}
+</div>
 {% endblock %}

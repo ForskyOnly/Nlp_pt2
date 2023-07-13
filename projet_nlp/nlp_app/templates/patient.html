@@ -1,6 +1,33 @@
 {% extends 'base.html' %}
 
 {% block patient %}
+    <style>
+        form {
+            margin-top: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 200px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #337ab7;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #286090;
+        }
+    </style>
+
     <h2>Exprimez ce que vous ressentez</h2>
     <form method="POST" action="{% url 'patient' %}">
         {% csrf_token %}

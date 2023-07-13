@@ -1,6 +1,51 @@
 {% extends 'base.html' %}
 
 {% block psy %}
+<style>
+    .container {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    h2 {
+        margin-bottom: 20px;
+    }
+
+    form {
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    input[type="text"] {
+        width: 300px;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+
+    input[type="submit"] {
+        padding: 10px 20px;
+        background-color: #337ab7;
+        color: #fff;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #286090;
+    }
+</style>
+
+<div class="container">
     <h2>Créer un nouveau patient</h2>
     <form method="POST">
         {% csrf_token %}
@@ -16,4 +61,5 @@
             <input type="submit" value="Créer">
         </div>
     </form>
+</div>
 {% endblock %}

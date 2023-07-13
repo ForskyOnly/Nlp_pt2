@@ -15,8 +15,8 @@ class Command(BaseCommand):
 
         all_psychologists = Psychologue.objects.all()
 
-        for i in range(20):
-            user = User.objects.create_user(username=fake.user_name(), password=fake.password(), is_patient=True)
+        for i in range(50):
+            user = User.objects.create_user(username=fake.user_name(), password="Azerty@123", is_patient=True)
             patient = Patient.objects.create(user=user, first_name=fake.first_name(), last_name=fake.last_name())
             patient.psychologue = all_psychologists[i % 5]  
             patient.save()
